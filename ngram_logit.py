@@ -14,7 +14,7 @@ import nltk
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression #, SGDClassifier
+from sklearn.linear_model import LogisticRegressionCV #, SGDClassifier
 
 def readText():
     ''' read text file, one file per one item in the list '''
@@ -120,7 +120,7 @@ def main():
     print(vectorizer.get_feature_names())
     # print(vectorizer.get_stop_words())
     # print(X_train.shape) # dimension = (153, 300)
-    clf = LogisticRegression() # SGDClassifier(loss = "hinge", penalty = "l2")
+    clf = LogisticRegressionCV(cv = 3) # SGDClassifier(loss = "hinge", penalty = "l2")
     clf.fit(X_train, list(y_train))
     ''' predict outcomes and test model '''
     X_test = vectorizer.transform(X_test)
