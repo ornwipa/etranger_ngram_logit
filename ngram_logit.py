@@ -117,7 +117,7 @@ def main():
     ''' select features and train model '''
     vectorizer = selectFeatures()
     X_train = vectorizer.fit_transform(X_train)
-    print(vectorizer.get_feature_names())
+    # print(vectorizer.get_feature_names())
     # print(vectorizer.get_stop_words())
     # print(X_train.shape) # dimension = (153, 300)
     clf = LogisticRegressionCV(cv = 3) # SGDClassifier(loss = "hinge", penalty = "l2")
@@ -125,8 +125,15 @@ def main():
     ''' predict outcomes and test model '''
     X_test = vectorizer.transform(X_test)
     # y_predicted = clf.predict(X_test)
-    print(clf.score(X_test, list(y_test)))
-        
+    print('accuracy = ' + str(clf.score(X_test, list(y_test)) ) )
+    ''' find coeeficient weights and evaluate results '''
+    features = vectorizer.get_feature_names()
+    coef = clf.coef_ # an array of shape (1, n_feature)
+    model_coef = pd.DataFrame([features, coef.T]).T # dataframe of 1000 rows, 2 cols
+    model_coef.columns = ['feature', 'coef']
+    model_coef.to_csv('model_coef.csv')
+    print(model_coef.sort_values(by=['coef'], inplace=False))
+    
     
 if __name__ == "__main__":
     main()
