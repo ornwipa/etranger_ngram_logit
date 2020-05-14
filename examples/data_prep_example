@@ -1,0 +1,15 @@
+Data Preparation Example
+                                                 texte partie
+0    aujourd’hui maman est morte ou peutêtre hier j...      0
+1    l’asile de vieillards est à marengo à quatrevi...      0
+2    j’ai pris l’autobus à deux heures il faisait t...      0
+3    j’ai couru pour ne pas manquer le départ cette...      0
+4    l’asile est à deux kilomètres du village j’ai ...      0
+..                                                 ...    ...
+199  l’aumônier m’a regardé avec une sorte de trist...      1
+200  il est resté assez longtemps détourné sa prése...      1
+201  « non mon fils atil dit en mettant la main sur...      1
+202  alors je ne sais pas pourquoi il y a quelque c...      1
+203  lui parti j’ai retrouvé le calme j’étais épuis...      1
+
+[204 rows x 2 columns]
