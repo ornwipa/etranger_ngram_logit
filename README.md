@@ -40,3 +40,7 @@ The ngram terms, in addition to one word, are valuable. The following are exampl
 - The word "temps" (coef = 1.0) did not appear to give much information. However, when bigram is included, the term "temps temps" (coef = -2.7), which probably came from "de temps en temps" after stop words were applied, could provide suggestion that a paragraph may be classified in part 1.
 
 Similar to the [word clouds](https://github.com/ornwipa/etranger_word_cloud), the terms that include "tout" and "bien" suggested for part 2. Those terms are "comme tout monde", "tout monde", "tout", "toute", "toute façon", "bien", "connaissait bien", "si bien", "très bien". The term "plus" also had positive coefficients but "plus" with other terms such as "plus loin" and "rien plus" yielded diverse results.
+
+### Limitation
+
+Word stemming and lemmatization were attempted but not used because they ended up causing confusion for some words. Still, the prediction model already performed well with existing features.

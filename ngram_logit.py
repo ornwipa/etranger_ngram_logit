@@ -11,6 +11,8 @@ import re
 import string
 import nltk
 # nltk.download('stopwords')
+# nltk.download('wordnet')
+from cltk.lemmatize.french.lemma import LemmaReplacer
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -51,6 +53,16 @@ def processText(text):
     text = text.translate(str.maketrans('','',string.punctuation))
     text = re.sub(' +', ' ', text)
     return text
+
+def stemLemmaWord(text):
+    ''' stem words ''' # this function is not used, 'partie' et 'partir' returns 'part'
+    tokens = text.split()
+    # tokens = LemmaReplacer().lemmatize(tokens)
+    wordList = []
+    for word in tokens:
+        stemmed_word = nltk.stem.snowball.FrenchStemmer().stem(word)
+        wordList.append(stemmed_word)
+    return ' '.join(wordList)
 
 def extractFeaturesLabels(text):
     ''' this function is specific to the book L’ÉTRANGER,
@@ -112,6 +124,8 @@ def main():
     dataset = extractFeaturesLabels(processedText)
     y = dataset[1] # dataset['partie']
     X = dataset[0] # selectFeatures(dataset['texte'])
+    dataset.columns = ['texte', 'partie']
+    # dataset.to_csv('corpus.csv')
     ''' split training and testing dataset '''
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
     ''' select features and train model '''
@@ -131,7 +145,7 @@ def main():
     coef = clf.coef_ # an array of shape (1, n_feature)
     model_coef = pd.DataFrame([features, coef.T]).T # dataframe of 1000 rows, 2 cols
     model_coef.columns = ['feature', 'coef']
-    model_coef.to_csv('model_coef.csv')
+    # model_coef.to_csv('model_coef.csv')
     print(model_coef.sort_values(by=['coef'], inplace=False))
     
     
